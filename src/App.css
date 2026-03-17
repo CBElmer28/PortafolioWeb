@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* 1. Solo reseteamos márgenes y aseguramos ancho */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* IMPORTANTE: Quitamos height: 100% para permitir el scroll natural */
+}
+
+/* 2. Color de fondo base para evitar "flashes" blancos al recargar */
+body {
+  background-color: #0a0a0a; /* neutral-950 */
+  color: #e5e5e5;
+  overflow-x: hidden; /* Previene scroll lateral indeseado */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar personalizada (Opcional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #171717; 
+}
+::-webkit-scrollbar-thumb {
+  background: #4f46e5; 
+  border-radius: 4px;
+}
