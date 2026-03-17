@@ -8,7 +8,7 @@ const Navbar = () => {
           </h2>
           
           <div className="hidden md:flex space-x-8">
-  {['Inicio', 'Habilidades', 'Proyectos', 'Educación', 'Contacto'].map((item) => (
+  {['Inicio', 'Habilidades', 'Proyectos', 'Contacto'].map((item) => (
   <a 
     key={item}
     href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`} 
