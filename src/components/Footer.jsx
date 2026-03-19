@@ -5,7 +5,6 @@ const Footer = () => {
         <div className="flex justify-center space-x-6 mb-8">
            <a href="#" className="text-neutral-400 hover:text-white transition-colors">Github</a>
            <a href="#" className="text-neutral-400 hover:text-white transition-colors">LinkedIn</a>
-           <a href="#" className="text-neutral-400 hover:text-white transition-colors">Twitter</a>
         </div>
         <p className="text-neutral-500 text-sm">
           &copy; {new Date().getFullYear()} Tu Nombre. Construido con React, Vite & Tailwind.

@@ -1,4 +1,5 @@
 import { projects } from '../data/projects';
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
   return (
@@ -18,9 +19,12 @@ const Projects = () => {
               <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">
                 {project.title}
               </h3>
-              <a href={project.link} target="_blank" rel="noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                <svg className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-              </a>
+              <Link 
+                to={`/proyecto/${project.id}`} 
+                className="mt-6 inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium"
+              >
+                Ver detalles del caso <span>&rarr;</span>
+              </Link>
             </div>
             
             <p className="text-neutral-400 mb-6 text-sm leading-relaxed">
