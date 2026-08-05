@@ -1,81 +1,110 @@
 import { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
+const roles = [
+  "Full Stack Developer",
+  "DevOps / Cloud",
+];
+
 const Hero = () => {
-  // ✅ Datos de tu Sobre Mí (Extracto)
-  const aboutMeText = "Estudiante de últimos ciclos de Ingeniería de Software (UTP) con un perfil tecnológico versátil y orientado a la construcción de soluciones end-to-end. Mi experiencia abarca desde el desarrollo Full Stack, hasta el diseño de Arquitecturas Cloud-Native y DevOps. Poseo una sólida especialización en BI e Ingeniería de Datos, integrando herramientas de IA para optimizar flujos de trabajo.";
+  const [roleIdx, setRoleIdx] = useState(0);
+  const [fade, setFade] = useState(true);
 
-  // ✅ Estado para el texto animado
-  const [typedText, setTypedText] = useState("");
-  const [index, setIndex] = useState(0);
-
-  // ✅ Efecto de Máquina de Escribir
   useEffect(() => {
-    if (index < aboutMeText.length) {
-      const timeoutId = setTimeout(() => {
-        setTypedText((prev) => prev + aboutMeText.charAt(index));
-        setIndex((prev) => prev + 1);
-      }, 15); // Velocidad de escritura (milisegundos por letra)
-      return () => clearTimeout(timeoutId);
-    }
-  }, [index, aboutMeText]);
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setRoleIdx(i => (i + 1) % roles.length);
+        setFade(true);
+      }, 300);
+    }, 2600);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden pt-28 pb-20 border-b border-white/5 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950">
-      
-      {/* Círculo de luz de fondo con degradado y desenfoque */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-indigo-500/20 to-purple-500/10 rounded-full blur-[110px] -z-10"></div>
+    <div className="relative min-h-screen flex flex-col justify-center pt-24 pb-16">
 
-      {/* Tu Nombre con un degradado de texto más vibrante y animación de fade-in inicial */}
-      <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-4 animate-fade-in-up">
-        <span className="block text-white mb-3">Elmer</span>
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-600">
-          Calizaya 
-        </span>
-      </h1>
-      
-      {/* Tu Rol Profesional */}
-      <h2 className="text-2xl md:text-3xl font-medium text-indigo-300 mb-10 tracking-wide animate-fade-in-up delay-100">
-        Ingeniero de Software | Full Stack | Data & Cloud / DevOps
-      </h2>
-      
-      {/* ✅ TEXTO CON EFECTO DE ESCRITURA */}
-      <div className="text-base md:text-lg text-neutral-400 max-w-4xl mb-12 leading-relaxed px-4 min-h-[140px] md:min-h-[100px] animate-fade-in-up delay-200">
-        <p>
-          {typedText}
-          {/* Cursor que parpadea (opcional) */}
-          <span className="inline-block w-[2px] h-[1.1em] bg-indigo-500 ml-1 animate-pulse"></span>
-        </p>
-      </div>
-      
-      {/* Botones de Acción con estilos mejorados y animación de fade-in */}
-      <div className="flex flex-col sm:flex-row gap-5 animate-fade-in-up delay-300">
-        <button 
-          onClick={() => document.getElementById('proyectos').scrollIntoView()}
-          className="group relative px-10 py-4 bg-indigo-600 rounded-full font-bold text-white shadow-lg shadow-indigo-500/20 overflow-hidden transition-all hover:scale-105 hover:shadow-indigo-500/40"
-        >
-          <span className="relative z-10">Ver Proyectos</span>
-          <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
-        </button>
-        <button 
-          onClick={() => document.getElementById('contacto').scrollIntoView()}
-          className="px-10 py-4 bg-transparent border-2 border-neutral-700 rounded-full font-bold text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all shadow-md hover:border-neutral-600"
-        >
-          Contactar
-        </button>
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-      {/* Íconos de Redes Sociales con estilos unificados y animación de fade-in */}
-      <div className="flex gap-6 mt-16 text-2xl text-neutral-500 animate-fade-in delay-500">
-        {[
-          { icon: FaGithub, link: "https://github.com/CBElmer28" },
-          { icon: FaLinkedin, link: "https://www.linkedin.com/in/elmer-calizaya-0a4976321/" },
-          { icon: FaEnvelope, link: "mailto:cbelmer28@gmail.com"}
-        ].map((social, i) => (
-          <a key={i} href={social.link} target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">
-            <social.icon />
-          </a>
-        ))}
+        {/* Columna principal */}
+        <div className="lg:col-span-8">
+
+          <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 border border-emerald-500/30 rounded-full bg-emerald-500/5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-emerald-400">
+              Disponible · Lima, Perú
+            </span>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-4">
+            <span className="block text-white">Elmer</span>
+            <span className="block text-white">Calizaya</span>
+          </h1>
+
+          {/* Rol rotativo */}
+          <div className="h-12 flex items-center mb-8">
+            <span
+              className="text-3xl md:text-4xl font-bold text-indigo-400 tracking-tight transition-opacity duration-300"
+              style={{ opacity: fade ? 1 : 0 }}
+            >
+              {roles[roleIdx]}
+            </span>
+          </div>
+
+          <p className="text-neutral-400 text-base leading-relaxed max-w-xl mb-10">
+            Estudiante de Ingeniería de Software (UTP) con perfil versátil —
+            construyo soluciones <span className="text-white">end-to-end</span>: desde APIs
+            y microservicios hasta dashboards BI y pipelines de datos.
+          </p>
+
+          <div className="flex flex-wrap gap-4 mb-12">
+            <button
+              onClick={() => document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:-translate-y-0.5 shadow-lg shadow-indigo-500/20 text-sm"
+            >
+              Ver proyectos
+            </button>
+            <button
+              onClick={() => document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3.5 border border-neutral-700 hover:border-neutral-500 text-neutral-300 hover:text-white font-bold rounded-full transition-all text-sm"
+            >
+              Contactar
+            </button>
+          </div>
+
+          <div className="flex gap-5 text-neutral-500">
+            {[
+              { icon: FaGithub, link: "https://github.com/CBElmer28", label: "GitHub" },
+              { icon: FaLinkedin, link: "https://www.linkedin.com/in/elmer-calizaya-0a4976321/", label: "LinkedIn" },
+              { icon: FaEnvelope, link: "https://mail.google.com/mail/?view=cm&fs=1&to=cbelmer28@gmail.com", label: "Email" }
+            ].map((s, i) => (
+              <a key={i} href={s.link} target="_blank" rel="noreferrer"
+                aria-label={s.label}
+                className="hover:text-indigo-400 transition-colors text-xl">
+                <s.icon />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Columna derecha — áreas con iconos */}
+        <div className="lg:col-span-4">
+          <p className="text-xs font-bold tracking-widest uppercase text-neutral-600 mb-5">Áreas</p>
+          {[
+            { icon: "devicon-spring-original colored", label: "Backend & APIs" },
+            { icon: "devicon-react-original colored", label: "Frontend & Móvil" },
+            { icon: "devicon-postgresql-plain colored", label: "Bases de Datos" },
+            { icon: "devicon-docker-plain colored", label: "DevOps & Cloud" },
+            { icon: "devicon-amazonwebservices-plain-wordmark colored", label: "AWS" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-4 py-3 border-b border-white/5 hover:border-indigo-500/30 transition-colors group cursor-default">
+              <i className={`${item.icon} text-2xl`} />
+              <span className="text-sm font-semibold text-neutral-300 group-hover:text-white transition-colors">
+                {item.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
