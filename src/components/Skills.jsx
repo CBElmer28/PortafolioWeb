@@ -1,124 +1,106 @@
 import { useEffect, useRef, useState } from 'react';
-import { FaCode, FaLaptopCode, FaDatabase, FaChartPie, FaCloud, FaRobot } from 'react-icons/fa6';
 
 const Skills = () => {
-  // Mantenemos tu estructura de datos con Devicon
-  const skillCategories = [
-    { title: "Backend & Arquitectura", icon: <FaCode />, skills: [
-      { name: "Java", icon: "devicon-java-plain colored" },
-      { name: "Spring Boot", icon: "devicon-spring-original colored" },
-      { name: "Python", icon: "devicon-python-plain colored" },
-      { name: "Node.js", icon: "devicon-nodejs-plain colored" },
-      { name: "PHP", icon: "devicon-php-plain colored" },
-      { name: "Microservicios", icon: null },
-      { name: "APIs RESTful", icon: null },
-      { name: "JWT", icon: null }
-    ]},
-    { title: "Frontend & Móvil", icon: <FaLaptopCode />, skills: [
-      { name: "React", icon: "devicon-react-original colored" },
-      { name: "Angular", icon: "devicon-angularjs-plain colored" },
-      { name: "React Native", icon: "devicon-react-original" },
-      { name: "JavaScript", icon: "devicon-javascript-plain colored" },
-      { name: "Tailwind CSS", icon: "devicon-tailwindcss-original colored" },
-      { name: "HTML5", icon: "devicon-html5-plain colored" },
-      { name: "CSS3", icon: "devicon-css3-plain colored" }
-    ]},
-    { title: "Bases de Datos", icon: <FaDatabase />, skills: [
-      { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain colored" },
-      { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
-      { name: "MySQL", icon: "devicon-mysql-plain colored" },
-      { name: "Cassandra", icon: "devicon-cassandra-plain colored" },
-    ]},
-    { title: "Data Intelligence & BI", icon: <FaChartPie />, skills: [
-      { name: "Power BI", icon: null }, 
-      { name: "BigQuery", icon: "devicon-googlecloud-plain colored" },
-      { name: "DAX Avanzado", icon: null },
-      { name: "SSIS", icon: null },
-      { name: "ETL Pipelines", icon: null }
-    ]},
-    { title: "DevOps & Cloud", icon: <FaCloud />, skills: [
-      { name: "Docker", icon: "devicon-docker-plain colored" },
-      { name: "GitHub Actions", icon: "devicon-github-original" },
-      { name: "AWS", icon: "devicon-amazonwebservices-plain-wordmark colored" },
-      { name: "Git", icon: "devicon-git-plain colored" },
-      { name: "Linux", icon: "devicon-linux-plain" },
-      { name: "Ubuntu", icon: "devicon-ubuntu-plain colored" }
-    ]},
-    { title: "Automatización, QA & IA", icon: <FaRobot />, skills: [
-      { name: "JUnit", icon: null },
-      { name: "Prometheus", icon: "devicon-prometheus-original colored" },
-      { name: "Postman", icon: "devicon-postman-plain colored" },
-      { name: "Scrum/Agile", icon: null },
-      { name: "JMeter", icon: null }
-    ]}
-  ];
-
-  // ✅ Referencia y Estado para la Animación al Scroll
   const skillsRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target); // Dejamos de observar una vez que se muestra
-        }
-      },
-      { threshold: 0.1 } 
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.unobserve(entry.target); } },
+      { threshold: 0.1 }
     );
-
-    // Corregido: Quitamos el ".ref" que sobraba
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current);
-    }
-
-    return () => {
-      // Corregido también por si acaso
-      if (skillsRef.current) {
-        observer.unobserve(skillsRef.current);
-      }
-    };
+    if (skillsRef.current) observer.observe(skillsRef.current);
+    return () => { if (skillsRef.current) observer.unobserve(skillsRef.current); };
   }, []);
 
-  return (
-    // ✅ Aplicamos animación de fade-in inicial a toda la sección
-    <div ref={skillsRef} className={`py-28 relative border-b border-white/5 animate-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      
-      {/* Decoración de fondo sutil */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-indigo-900/10 rounded-full blur-3xl -z-10"></div>
+  const areas = [
+    {
+      label: "Backend",
+      icon: "devicon-spring-original colored",
+      skills: [
+        { name: "Java", icon: "devicon-java-plain colored" },
+        { name: "Spring Boot", icon: "devicon-spring-original colored" },
+        { name: "PHP / Laravel", icon: "devicon-laravel-original colored" },
+        { name: "Python", icon: "devicon-python-plain colored" },
+        { name: "Node.js", icon: "devicon-nodejs-plain colored" },
+      ]
+    },
+    {
+      label: "Frontend",
+      icon: "devicon-react-original colored",
+      skills: [
+        { name: "React", icon: "devicon-react-original colored" },
+        { name: "Angular", icon: "devicon-angularjs-plain colored" },
+        { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+        { name: "Tailwind CSS", icon: "devicon-tailwindcss-original colored" },
+        { name: "HTML5 / CSS3", icon: "devicon-html5-plain colored" },
+      ]
+    },
+    {
+      label: "Bases de Datos",
+      icon: "devicon-postgresql-plain colored",
+      skills: [
+        { name: "MySQL", icon: "devicon-mysql-plain colored" },
+        { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
+        { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain colored" },
+      ]
+    },
+    {
+      label: "DevOps & Cloud",
+      icon: "devicon-docker-plain colored",
+      skills: [
+        { name: "Docker", icon: "devicon-docker-plain colored" },
+        { name: "GitHub Actions", icon: "devicon-github-original" },
+        { name: "AWS", icon: "devicon-amazonwebservices-plain-wordmark colored" },
+        { name: "Git", icon: "devicon-git-plain colored" },
+      ]
+    },
+    {
+      label: "Testing & Herramientas",
+      icon: "devicon-postman-plain colored",
+      skills: [
+        { name: "Postman", icon: "devicon-postman-plain colored" },
+        { name: "Jira", icon: "devicon-jira-plain colored" },
+        { name: "Scrum", icon: null },
+      ]
+    },
+  ];
 
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
-          Stack <span className="text-indigo-500">Tecnológico</span>
+  return (
+    <div ref={skillsRef} id="habilidades"
+      className={`py-24 border-t border-white/5 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+
+      <div className="mb-14">
+        <p className="text-xs font-bold tracking-widest uppercase text-neutral-600 mb-3">Habilidades</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white leading-tight">
+          Stack <span className="text-indigo-400">tecnológico</span>
         </h2>
-        <p className="text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">
-          Un conjunto de herramientas modernas y metodologías que utilizo para construir soluciones end-to-end robustas, escalables y eficientes.
-        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillCategories.map((category, index) => (
-          // ✅ Animación fadeInUp con delay escalonado para cada tarjeta
-          <div 
-            key={index} 
-            className={`bg-neutral-900/40 border border-white/5 rounded-3xl p-8 hover:border-indigo-500/40 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-            style={{ animationDelay: `${index * 150}ms` }}
+      <div className="space-y-0">
+        {areas.map((area, i) => (
+          <div
+            key={i}
+            className={`grid grid-cols-12 gap-6 py-5 border-b border-white/5 hover:bg-white/[0.02] transition-colors group ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+            style={{ animationDelay: `${i * 80}ms` }}
           >
-            {/* Título de la Categoría */}
-            <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4 text-white">
-              <span className="text-2xl text-neutral-400">{category.icon}</span>
-              <h3 className="text-xl font-semibold tracking-wide">{category.title}</h3>
+            <div className="col-span-12 md:col-span-3 flex items-center gap-3">
+              {area.icon
+                ? <i className={`${area.icon} text-2xl shrink-0`} />
+                : <span className="w-6" />
+              }
+              <h3 className="text-sm font-bold text-neutral-300 group-hover:text-white transition-colors whitespace-nowrap">
+                {area.label}
+              </h3>
             </div>
-            
-            {/* Habilidades Individuales */}
-            <div className="flex flex-wrap gap-2.5">
-              {category.skills.map((skill) => (
-                <span 
-                  key={skill.name}
-                  className="flex items-center gap-2.5 px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-950 rounded-lg border border-neutral-800 hover:border-indigo-500/50 hover:text-white hover:bg-indigo-500/5 transition-colors cursor-default"
+
+            <div className="col-span-12 md:col-span-9 flex flex-wrap gap-2 items-center">
+              {area.skills.map((skill, j) => (
+                <span
+                  key={j}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-neutral-400 border border-neutral-800 rounded-lg hover:border-neutral-600 hover:text-neutral-200 transition-all cursor-default"
                 >
-                  {skill.icon && <i className={`${skill.icon} text-xl`}></i>}
+                  {skill.icon && <i className={`${skill.icon} text-base`} />}
                   {skill.name}
                 </span>
               ))}

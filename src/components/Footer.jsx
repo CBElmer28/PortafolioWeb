@@ -1,16 +1,23 @@
 const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-neutral-950 py-12">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <div className="flex justify-center space-x-6 mb-8">
-           <a href="#" className="text-neutral-400 hover:text-white transition-colors">Github</a>
-           <a href="#" className="text-neutral-400 hover:text-white transition-colors">LinkedIn</a>
+    <footer className="border-t border-white/5 bg-neutral-950 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-neutral-600 text-xs">
+            © {new Date().getFullYear()} Elmer Josué Calizaya Bendezú — Construido con React, Vite & Tailwind CSS
+          </p>
+          <div className="flex gap-6">
+            <a href="https://github.com/CBElmer28" target="_blank" rel="noreferrer"
+              className="text-neutral-600 hover:text-neutral-300 transition-colors text-xs">GitHub</a>
+            <a href="https://www.linkedin.com/in/elmer-calizaya-0a4976321/" target="_blank" rel="noreferrer"
+              className="text-neutral-600 hover:text-neutral-300 transition-colors text-xs">LinkedIn</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cbelmer28@gmail.com" target="_blank" rel="noreferrer"
+              className="text-neutral-600 hover:text-neutral-300 transition-colors text-xs">Email</a>
+          </div>
         </div>
-        <p className="text-neutral-500 text-sm">
-          &copy; {new Date().getFullYear()} Tu Nombre. Construido con React, Vite & Tailwind.
-        </p>
       </div>
     </footer>
   );
 };
+
 export default Footer;

@@ -17,7 +17,6 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200 font-sans pb-20">
-      {/* Navbar simplificado */}
       <nav className="border-b border-white/10 bg-neutral-950/70 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
           <Link to="/" className="flex items-center gap-2 text-neutral-400 hover:text-indigo-400 transition-colors">
@@ -45,11 +44,9 @@ const ProjectDetail = () => {
           ))}
         </div>
 
-        {/* NUEVO: Objetivo del Proyecto */}
+        {/* Objetivo del Proyecto */}
         <div className="mb-24 bg-neutral-900/30 p-8 md:p-12 rounded-3xl border border-white/5 max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl font-bold text-white mb-6 flex items-center justify-center gap-3">
-            <span className="text-indigo-500"></span> Objetivo del Proyecto
-          </h3>
+          <h3 className="text-2xl font-bold text-white mb-6">Objetivo del Proyecto</h3>
           <p className="text-neutral-400 leading-relaxed text-lg">
             {project.objective}
           </p>
@@ -58,36 +55,68 @@ const ProjectDetail = () => {
         {/* Características Destacadas */}
         <div className="space-y-24 mb-24">
           <h3 className="text-3xl font-bold text-center text-white mb-16">Características Clave</h3>
-          
+
           {project.features?.map((feature, index) => {
             const isEven = index % 2 === 0;
-            
-            return (
-              <div 
-                key={index} 
-                className={`flex flex-col md:flex-row gap-10 md:gap-16 items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}
-              >
-                <div className="w-full md:w-1/2">
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-indigo-500/10 border border-white/10 group bg-neutral-900 aspect-video flex items-center justify-center">
-                    {/* Si no tienes la imagen real aún, se mostrará un placeholder gris oscuro */}
-                    {feature.image ? (
-                        <img 
-                            src={feature.image} 
-                            alt={feature.title} 
-                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                        />
-                    ) : (
-                        <span className="text-neutral-600">Imagen: {feature.title}</span>
-                    )}
-                    <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                </div>
 
-                <div className="w-full md:w-1/2">
-                  <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">{feature.title}</h4>
-                  <p className="text-neutral-400 leading-relaxed text-lg">
-                    {feature.description}
-                  </p>
+            // Soporta tanto `image` (string única) como `images` (array de múltiples capturas)
+            const imageList = feature.images?.length
+              ? feature.images
+              : (feature.image ? [feature.image] : []);
+
+            return (
+              <div
+                key={index}
+                className="flex flex-col gap-10"
+              >
+                <div className={`flex flex-col md:flex-row gap-10 md:gap-16 items-start ${!isEven ? 'md:flex-row-reverse' : ''}`}>
+
+                  {/* Bloque de imagen(es) */}
+                  <div className="w-full md:w-1/2">
+                    {imageList.length > 1 ? (
+                      // Múltiples capturas: grid apilado
+                      <div className="grid grid-cols-1 gap-4">
+                        {imageList.map((img, i) => (
+                          <div
+                            key={i}
+                            className="relative rounded-2xl overflow-hidden shadow-xl shadow-indigo-500/10 border border-white/10 group bg-neutral-900 aspect-video flex items-center justify-center"
+                          >
+                            {img ? (
+                              <img
+                                src={img}
+                                alt={`${feature.title} ${i + 1}`}
+                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                              />
+                            ) : (
+                              <span className="text-neutral-600 text-sm">Captura {i + 1}: {feature.title}</span>
+                            )}
+                            <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      // Una sola imagen (o ninguna -> placeholder)
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-indigo-500/10 border border-white/10 group bg-neutral-900 aspect-video flex items-center justify-center">
+                        {imageList[0] ? (
+                          <img
+                            src={imageList[0]}
+                            alt={feature.title}
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <span className="text-neutral-600">Imagen: {feature.title}</span>
+                        )}
+                        <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="w-full md:w-1/2">
+                    <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">{feature.title}</h4>
+                    <p className="text-neutral-400 leading-relaxed text-lg">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
@@ -98,7 +127,17 @@ const ProjectDetail = () => {
         <div className="flex flex-wrap justify-center gap-6 pt-12 border-t border-white/5">
           {project.github && (
             <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-full transition-all hover:-translate-y-1">
-              <FaGithub className="text-xl" /> Ver Código Fuente
+              <FaGithub className="text-xl" /> {project.githubLabel || "Ver Código Fuente"}
+            </a>
+          )}
+          {project.frontendGithub && (
+            <a href={project.frontendGithub} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-full transition-all hover:-translate-y-1">
+              <FaGithub className="text-xl" /> Repositorio Frontend
+            </a>
+          )}
+          {project.backendGithub && (
+            <a href={project.backendGithub} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-full transition-all hover:-translate-y-1">
+              <FaGithub className="text-xl" /> Repositorio Backend
             </a>
           )}
           {project.demo && (

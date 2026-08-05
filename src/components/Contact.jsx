@@ -1,20 +1,72 @@
 const Contact = () => {
   return (
-    <div className="py-24 text-center">
-      <div className="max-w-3xl mx-auto bg-gradient-to-b from-neutral-900 to-neutral-950 p-12 rounded-3xl border border-indigo-500/20 shadow-2xl shadow-indigo-500/5">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Buscando talento tecnológico?</h2>
-        <p className="text-neutral-400 mb-8 text-lg">
-          Actualmente estoy en búsqueda activa de oportunidades para prácticas pre-profesionales o roles Junior en áreas de Desarrollo de Software, DevOps o Data Analytics. ¡Conversemos sobre cómo puedo aportar valor a tu equipo!
-        </p>
-        <a 
-          href="mailto:tuemail@ejemplo.com" 
-          className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white font-bold rounded-full hover:bg-indigo-500 transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/25"
-        >
-          <span>Enviar un correo</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        </a>
+    <section id="contacto" className="py-24 border-t border-white/5">
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-end">
+
+        <div className="lg:col-span-7">
+          <p className="text-xs font-bold tracking-widest uppercase text-neutral-600 mb-3">Contacto</p>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight mb-8">
+            Disponible para<br />
+            <span className="text-indigo-400">prácticas</span><br />
+            <span className="text-neutral-500">& roles junior</span>
+          </h2>
+          <p className="text-neutral-400 text-base leading-relaxed max-w-lg">
+            Busco oportunidades laborales. Perfil orientado
+            al ecosistema Java — listo para aportar desde el primer día en un
+            equipo de desarrollo.
+          </p>
+        </div>
+
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=cbelmer28@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between px-6 py-5 border border-neutral-700 hover:border-indigo-500 rounded-xl group transition-all hover:bg-indigo-500/5"
+          >
+            <div>
+              <p className="text-xs text-neutral-600 mb-1">Email</p>
+              <p className="text-sm font-semibold text-neutral-200 group-hover:text-white transition-colors">
+                cbelmer28@gmail.com
+              </p>
+            </div>
+            <span className="text-neutral-600 group-hover:text-indigo-400 transition-colors text-lg">↗</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/elmer-calizaya-0a4976321/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between px-6 py-5 border border-neutral-700 hover:border-indigo-500 rounded-xl group transition-all hover:bg-indigo-500/5"
+          >
+            <div>
+              <p className="text-xs text-neutral-600 mb-1">LinkedIn</p>
+              <p className="text-sm font-semibold text-neutral-200 group-hover:text-white transition-colors">
+                Elmer Calizaya Bendezú
+              </p>
+            </div>
+            <span className="text-neutral-600 group-hover:text-indigo-400 transition-colors text-lg">↗</span>
+          </a>
+
+          <a
+            href="https://github.com/CBElmer28"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between px-6 py-5 border border-neutral-700 hover:border-indigo-500 rounded-xl group transition-all hover:bg-indigo-500/5"
+          >
+            <div>
+              <p className="text-xs text-neutral-600 mb-1">GitHub</p>
+              <p className="text-sm font-semibold text-neutral-200 group-hover:text-white transition-colors">
+                github.com/CBElmer28
+              </p>
+            </div>
+            <span className="text-neutral-600 group-hover:text-indigo-400 transition-colors text-lg">↗</span>
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
+
 export default Contact;
